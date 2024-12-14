@@ -1,0 +1,98 @@
+﻿<Window x:Class="mastermind2._0.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mastermind2._0"
+        mc:Ignorable="d"
+        Title="mastermind" Height="600" Width="1000" KeyDown="Window_KeyDown" Background="Black" Name="hoofdscherm">
+    <Grid>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="250*"/>
+            <ColumnDefinition Width="250*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="120*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Button Visibility="Visible" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" Name="CheckCodeButton" Content="check code" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Height="42" FontSize="20" Click="CheckCodeButton_Click"/>
+        <Label Visibility="Visible" BorderBrush="Gray" BorderThickness="15" Name="kleurvlak1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Height="240" Width="250" Grid.Column="0" Content=" " HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="60" MouseWheel="kleurvlak1_MouseWheel"/>
+        <Label Visibility="Visible" BorderBrush="Gray" BorderThickness="15" Name="kleurvlak4" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Height="240" Width="250" Grid.Column="3" Content=" " HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="60" MouseWheel="kleurvlak4_MouseWheel"/>
+        <Label Visibility="Visible" BorderBrush="Gray" BorderThickness="15" Name="kleurvlak3" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Height="240" Width="250" Grid.Column="2" Content=" " HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="60" MouseWheel="kleurvlak3_MouseWheel"/>
+        <Label Visibility="Visible" BorderBrush="Gray" BorderThickness="15" Name="kleurvlak2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Height="240" Width="250" Grid.Column="1" Content=" " HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="60" MouseWheel="kleurvlak2_MouseWheel"/>
+
+        <Label Name="randomkleur1" Grid.Column="0" Grid.Row="1" Visibility="Hidden" Grid.ColumnSpan="3" Margin="0,146,0,3" Grid.RowSpan="2">randomkleur1</Label>
+        <Label Name="randomkleur2" Grid.Column="3" Grid.Row="1" Visibility="Hidden" Margin="0,146,0,3" Grid.RowSpan="2">randomkleur2</Label>
+        <Label Name="randomkleur3" Grid.Column="4" Grid.Row="1" Visibility="Hidden" Margin="0,146,0,3" Grid.RowSpan="2">randomkleur3</Label>
+        <Label Name="randomkleur4" Grid.Column="5" Grid.Row="1" Visibility="Hidden" Margin="0,146,0,3" Grid.RowSpan="2">randomkleur4</Label>
+        <Label Name="labelnumber1" Grid.Column="0" Grid.Row="1" Visibility="Hidden" Grid.ColumnSpan="3" Margin="0,146,0,3" Grid.RowSpan="2">0</Label>
+        <Label Name="labelnumber2" Grid.Column="3" Grid.Row="1" Visibility="Hidden" Margin="0,146,0,3" Grid.RowSpan="2">0</Label>
+        <Label Name="labelnumber3" Grid.Column="4" Grid.Row="1" Visibility="Hidden" Margin="0,146,0,3" Grid.RowSpan="2">0</Label>
+        <Label Name="labelnumber4" Grid.Column="5" Grid.Row="1" Visibility="Hidden" Margin="0,146,0,3" Grid.RowSpan="2">0</Label>
+        <TextBox Name="toggledebug" Grid.Row="3" Grid.Column="0" Background="Transparent" Foreground="Red" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Hidden" KeyDown="Window_KeyDown" Height="29" Width="auto" Margin="0,84,0,0">code</TextBox>
+        <TextBox Width="50" Margin="0,0,170,0" Visibility="Visible" Name="countdown" Height="50" Grid.Row="1" BorderThickness="0" Background="Transparent" FontSize="20" Foreground="White" Grid.RowSpan="1" Grid.Column="0">00:00</TextBox>
+        <Label Visibility="Visible" Name="scorelable" Grid.Row="1" Grid.Column="3" Height="50" FontSize="20" Background="Transparent" Foreground="White" Margin="0,1,0,0">je score is 100/100</Label>
+        <Label Visibility="Visible" Name="lastcheck1" FontSize="20" Background="Black" Grid.Row="2" Grid.Column="0" BorderBrush="Gray" BorderThickness="10" Margin="30,35,30,20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
+        <Label Visibility="Visible" Name="lastcheck2" FontSize="20" Background="Black" Grid.Row="2" Grid.Column="1" BorderBrush="Gray" BorderThickness="10" Margin="30,35,30,20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
+        <Label Visibility="Visible" Name="lastcheck3" FontSize="20" Background="Black" Grid.Row="2" Grid.Column="2" BorderBrush="Gray" BorderThickness="10" Margin="30,35,30,20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
+        <Label Visibility="Visible" Name="lastcheck4" FontSize="20" Background="Black" Grid.Row="2" Grid.Column="3" BorderBrush="Gray" BorderThickness="10" Margin="30,35,30,20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
+        <Label Visibility="Visible" Name="lastchecktxt" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Margin="0,0,0,0">laaste code keuze:</Label>
+        
+        <Menu Name="hintkopenmenu" FontSize="15" Width="80" Height="25" Grid.Column="0" Grid.Row="1" Margin="80,0,0,0">
+            <MenuItem Header="hint kopen">
+                <MenuItem Header="juiste kleur op juiste plek: -25 score" Click="vijfentwintig_Click"/>
+                <MenuItem Header="juiste kleur die voorkomt: -15 score" Click="vijftien_Click"/>
+            </MenuItem>
+        </Menu>
+        
+        <Menu Grid.Column="3" Grid.Row="3" Height="20" Width="140" Margin="110,80,0,0">
+            <MenuItem Header="game">
+                <MenuItem Header="Nieuw spel" Click="NieuwSpel_Click"/>
+                <MenuItem Header="Highscores" Click="Highscores_Click"/>
+                <Separator/>
+                <MenuItem Header="Afsluiten" Click="Afsluiten_Click"/>
+            </MenuItem>
+            <MenuItem Header="Instellingen">
+                <MenuItem Header="Aantal pogingen" Click="AantalPogingen_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <StackPanel Background="Red" Name="stackpanelaantalpoginen" Visibility="Hidden" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="100" >
+            <TextBlock Text="Stel het aantal pogingen in:" Margin="0,0,0,10" Foreground="White"/>
+            <TextBox Name="AantalPogingentextbox" Width="100" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+            <Button Content="Opslaan" Width="100" HorizontalAlignment="Left" Click="Opslaan_Click" Margin="25,10,0,0"/>
+        </StackPanel>
+        
+        <StackPanel Background="Red" Name="naaminput" Visibility="hidden" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="100" >
+            <TextBlock FontSize="20" Text="voer je naam in:" Margin="0,0,0,10" Foreground="White"/>
+            <TextBox Name="naamtextbox" Width="100" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+            <Button FontSize="15" Content="Opslaan naam" Width="100" HorizontalAlignment="Left" Click="opslaannaam_Click" Margin="25,10,0,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="3">
+            <Label Foreground="White" FontSize="15">TOOLTIP:</Label>
+            <Label Foreground="White" FontSize="15">rode rand: "juiste kleur, juiste plaats"</Label>
+            <Label Foreground="White" FontSize="15">witte rand: "juiste kleur, foute plaats"</Label>
+            <Label Foreground="White" FontSize="15">geen rand: "kleur komt niet voor"</Label>
+        </StackPanel>
+
+        
+
+        <!--<Menu Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <MenuItem Header="Bestand">
+                <MenuItem Header="Nieuw spel"/>
+                <MenuItem Header="Highscores" />
+                <Separator/>
+                <MenuItem Header="Afsluiten" />
+            </MenuItem>
+            <MenuItem Header="Instellingen">
+                <MenuItem Header="Aantal pogingen" />
+            </MenuItem>
+        </Menu>-->
+    </Grid>
+</Window>
